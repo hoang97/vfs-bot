@@ -14,9 +14,9 @@ Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
 
-import logging
+import logging, json
 
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update, KeyboardButton, WebAppInfo
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -233,8 +233,11 @@ async def slot(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             "Send /back to comback to previous step.\n\n"
             "Send /cancel to stop talking to me.\n\n"
             "Gorgeous! Now, fill the application in form below please",
-            reply_markup=ReplyKeyboardMarkup(
-                reply_keyboard, one_time_keyboard=True, input_field_placeholder="Fill in your information"
+            reply_markup=ReplyKeyboardMarkup.from_button(
+                KeyboardButton(
+                    text="Open the application form!",
+                    web_app=WebAppInfo(url="https://hoang97.github.io/vfs-bot"),
+                )
             ),
         )
         return FORM
@@ -268,10 +271,12 @@ async def back_slot(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 async def form(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Stores the photo and asks for a location."""
+    data = json.loads(update.effective_message.web_app_data.data)
     await update.message.reply_text(
         "Hi! My name is Professor Bot. I will hold a conversation with you.\n"
         "Send /back to comback to previous step.\n\n"
         "Send /cancel to stop talking to me.\n\n"
+        f"Form Data: {data}\n\n"
         "Gorgeous, please choose your meeting date",
         reply_markup=ReplyKeyboardMarkup(
             reply_keyboard, one_time_keyboard=True, input_field_placeholder="Success or Fail?"
