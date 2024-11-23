@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applicant Form</title>
+  <link rel="stylesheet" href="web.css">
+</head>
+<body>
+  <div class="form-container">
+    <h1>Applicant 1</h1>
+    <form>
+      <label for="firstName">First Name<span>*</span></label>
+      <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+
+      <label for="lastName">Last Name<span>*</span></label>
+      <input type="text" id="lastName" name="lastName" placeholder="Please enter last name" required>
+
+      <label for="gender">Gender<span>*</span></label>
+      <select id="gender" name="gender" required>
+        <option value="" disabled selected>Select</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="dob">Date of Birth<span>*</span></label>
+      <input type="date" id="dob" name="dob" required>
+
+      <label for="nationality">Current Nationality<span>*</span></label>
+      <select id="nationality" name="nationality" required>
+        <option value="" disabled selected>Select</option>
+        <option value="usa">USA</option>
+        <option value="uk">UK</option>
+        <option value="india">India</option>
+        <!-- Add more options as needed -->
+      </select>
+
+      <label for="passportNumber">Passport Number</label>
+      <input type="text" id="passportNumber" name="passportNumber" placeholder="Enter passport number">
+
+      <label for="passportExpiry">Passport Expiry Date</label>
+      <input type="date" id="passportExpiry" name="passportExpiry">
+
+      <label for="contactNumber">Contact Number<span>*</span></label>
+      <div class="contact-input">
+        <input type="text" id="countryCode" name="countryCode" value="44" readonly>
+        <input type="text" id="contactNumber" name="contactNumber" placeholder="012345648382" required>
+      </div>
+
+      <label for="email">Email<span>*</span></label>
+      <input type="email" id="email" name="email" placeholder="Enter email address" required>
+
+      <div class="form-buttons">
+        <button type="reset" class="cancel-button">Cancel</button>
+        <button type="submit" class="save-button">Save</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
