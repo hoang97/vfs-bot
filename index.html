@@ -1,70 +1,39 @@
+<!--
+    Simple static Telegram WebApp. Does not verify the WebAppInitData, as a bot token would be needed for that.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-  <title>Applicant Form</title>
-  <link rel="stylesheet" href="web.css">
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta charset="UTF-8">
+    <title>python-telegram-bot Example WebApp</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
 <script type="text/javascript">
-  Telegram.WebApp.ready();
-  Telegram.WebApp.MainButton.setText('Save').show().onClick(function () {
-      const form = document.getElementById('applicantForm');
-      const formData = new FormData(form);
-      const data = JSON.stringify(Object.fromEntries(formData));
-      Telegram.WebApp.sendData(data);
-      Telegram.WebApp.close();
-  });
+    const colorPicker = new iro.ColorPicker('#picker', {
+        borderColor: "#ffffff",
+        borderWidth: 1,
+        width: Math.round(document.documentElement.clientWidth / 2),
+    });
+    colorPicker.on('color:change', function (color) {
+        document.body.style.background = color.hexString;
+    });
+
+    Telegram.WebApp.ready();
+    Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
+        const data = JSON.stringify({hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb});
+        Telegram.WebApp.sendData(data);
+        Telegram.WebApp.close();
+    });
 </script>
-<body>
-  <div class="form-container">
-    <h1>Applicant 1</h1>
-    <form id="applicantForm">
-      <label for="firstName">First Name<span>*</span></label>
-      <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
-
-      <label for="lastName">Last Name<span>*</span></label>
-      <input type="text" id="lastName" name="lastName" placeholder="Please enter last name" required>
-
-      <!-- <label for="gender">Gender<span>*</span></label>
-      <select id="gender" name="gender" required>
-        <option value="" disabled selected>Select</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-      </select> -->
-
-      <label for="dob">Date of Birth<span>*</span></label>
-      <input type="date" id="dob" name="dob" required>
-
-      <label for="nationality">Current Nationality<span>*</span></label>
-      <select id="nationality" name="nationality" required>
-        <option value="" disabled selected>Select</option>
-        <option value="usa">USA</option>
-        <option value="uk">UK</option>
-        <option value="india">India</option>
-        <!-- Add more options as needed -->
-      </select>
-
-      <label for="passportNumber">Passport Number</label>
-      <input type="text" id="passportNumber" name="passportNumber" placeholder="Enter passport number">
-
-      <label for="passportExpiry">Passport Expiry Date</label>
-      <input type="date" id="passportExpiry" name="passportExpiry">
-
-      <label for="contactNumber">Contact Number<span>*</span></label>
-      <div class="contact-input">
-        <input type="text" id="countryCode" name="countryCode" value="44" readonly>
-        <input type="text" id="contactNumber" name="contactNumber" placeholder="012345648382" required>
-      </div>
-
-      <label for="email">Email<span>*</span></label>
-      <input type="email" id="email" name="email" placeholder="Enter email address" required>
-    </form>
-  </div>
+<body style="background-color: #ffffff">
+<div style="position: absolute; margin-top: 5vh; margin-left: 5vw; height: 90vh; width: 90vw; border-radius: 5vh; background-color: var(--tg-theme-bg-color); box-shadow: 0 0 2vw
+ #000000;">
+    <div id="picker"
+         style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%"></div>
+</div>
 </body>
 <script type="text/javascript">
-  Telegram.WebApp.expand();
+    Telegram.WebApp.expand();
 </script>
 </html>
