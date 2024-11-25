@@ -5,33 +5,108 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>python-telegram-bot Example WebApp</title>
+    <title>VFS appliant form</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
-<script type="text/javascript">
-    const colorPicker = new iro.ColorPicker('#picker', {
-        borderColor: "#ffffff",
-        borderWidth: 1,
-        width: Math.round(document.documentElement.clientWidth / 2),
-    });
-    colorPicker.on('color:change', function (color) {
-        document.body.style.background = color.hexString;
-    });
+    <script type="text/javascript">
+        Telegram.WebApp.ready();
+        Telegram.WebApp.MainButton.setText('Save').show().onClick(function () {
+            const form = document.getElementById('applicantForm');
+            const formData = new FormData(form);
+            const data = JSON.stringify(Object.fromEntries(formData));
+            Telegram.WebApp.sendData(data);
+            Telegram.WebApp.close();
+        });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicant Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .form-container label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .form-container input,
+        .form-container select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-container button.save {
+            background-color: #e67e22;
+            color: white;
+        }
+        .form-container button.cancel {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form id="applicantForm">
+            <h2>Applicant 1</h2>
 
-    Telegram.WebApp.ready();
-    Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
-        const data = JSON.stringify({hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb});
-        Telegram.WebApp.sendData(data);
-        Telegram.WebApp.close();
-    });
-</script>
-<body style="background-color: #ffffff">
-<div style="position: absolute; margin-top: 5vh; margin-left: 5vw; height: 90vh; width: 90vw; border-radius: 5vh; background-color: var(--tg-theme-bg-color); box-shadow: 0 0 2vw
- #000000;">
-    <div id="picker"
-         style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%"></div>
-</div>
+            <label for="first-name">First Name*</label>
+            <input type="text" id="first-name" placeholder="ENTER YOUR FIRST NAME">
+
+            <label for="last-name">Last Name*</label>
+            <input type="text" id="last-name" placeholder="PLEASE ENTER LAST NAME.">
+
+            <label for="gender">Gender*</label>
+            <select id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="dob">Date Of Birth*</label>
+            <input type="date" id="dob">
+
+            <label for="nationality">Current Nationality*</label>
+            <select id="nationality">
+                <option value="nationality1">Nationality 1</option>
+                <option value="nationality2">Nationality 2</option>
+                <option value="nationality3">Nationality 3</option>
+            </select>
+
+            <label for="passport-number">Passport Number</label>
+            <input type="text" id="passport-number" placeholder="ENTER PASSPORT NUMBER">
+
+            <label for="passport-expiry">Passport Expiry Date</label>
+            <input type="date" id="passport-expiry">
+
+            <label for="contact-number">Contact Number*</label>
+            <div style="display: flex; gap: 5px;">
+                <input type="text" style="width: 15%;" value="44" readonly>
+                <input type="text" id="contact-number" placeholder="012345648382">
+            </div>
+
+            <label for="email">Email*</label>
+            <input type="email" id="email" placeholder="ENTER EMAIL ADDRESS">
+        </form>
+    </div>
 </body>
 <script type="text/javascript">
     Telegram.WebApp.expand();
