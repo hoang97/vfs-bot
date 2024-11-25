@@ -18,17 +18,17 @@
              <!-- First Name -->
              <div class="mb-3">
                  <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
-                 <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+                 <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter your first name" required>
              </div>
              <!-- Last Name -->
              <div class="mb-3">
                  <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
-                 <input type="text" class="form-control" id="lastName" placeholder="Please enter last name" required>
+                 <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Please enter last name" required>
              </div>
              <!-- Gender -->
              <div class="mb-3">
                  <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
-                 <select class="form-select" id="gender" required>
+                 <select name="gender" class="form-select" id="gender" required>
                      <option value="Male">Male</option>
                      <option value="Female">Female</option>
                      <option value="Other">Other</option>
@@ -37,12 +37,12 @@
              <!-- Date of Birth -->
              <div class="mb-3">
                  <label for="dob" class="form-label">Date of Birth <span class="text-danger">*</span></label>
-                 <input type="date" class="form-control" id="dob" required>
+                 <input type="date" name="dob" class="form-control" id="dob" required>
              </div>
              <!-- Current Nationality -->
              <div class="mb-3">
                  <label for="nationality" class="form-label">Current Nationality <span class="text-danger">*</span></label>
-                 <select class="form-select" id="nationality" required>
+                 <select name="nationality" class="form-select" id="nationality" required>
                      <option value="Vietnam">Vietnam</option>
                      <option value="Ukraine">Ukraine</option>
                      <option value="Russia">Russia</option>
@@ -52,25 +52,30 @@
              <!-- Passport Number -->
              <div class="mb-3">
                  <label for="passportNumber" class="form-label">Passport Number</label>
-                 <input type="text" class="form-control" id="passportNumber" placeholder="Enter passport number">
+                 <input type="text" name="passportNumber" class="form-control" id="passportNumber" placeholder="Enter passport number">
              </div>
              <!-- Passport Expiry Date -->
              <div class="mb-3">
                  <label for="passportExpiryDate" class="form-label">Passport Expiry Date</label>
-                 <input type="date" class="form-control" id="passportExpiryDate">
+                 <input type="date" name="passportExpiryDate" class="form-control" id="passportExpiryDate">
              </div>
              <!-- Contact Number -->
              <div class="mb-3">
                  <label for="contactNumber" class="form-label">Contact Number <span class="text-danger">*</span></label>
                  <div class="input-group">
-                     <span class="input-group-text">+44</span>
-                     <input type="tel" class="form-control" id="contactNumber" placeholder="012345648382" required>
+                    <select name="countryCode" class="form-select-sm input-group-text" id="countryCode" required>
+                        <option value="+84">+84</option>
+                        <option value="+7">+7</option>
+                        <option value="+123">+123</option>
+                        <!-- Add options for nationalities here -->
+                    </select>
+                    <input type="tel" name="contactNumber" class="form-control" id="contactNumber" placeholder="012345648382" required>
                  </div>
              </div>
              <!-- Email -->
              <div class="mb-3">
                  <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                 <input type="email" class="form-control" id="email" placeholder="Enter email address" required>
+                 <input type="email" name="email" class="form-control" id="email" placeholder="Enter email address" required>
              </div>
          </form>
      </div>
@@ -80,9 +85,9 @@
 <script type="text/javascript">
     Telegram.WebApp.ready();
     Telegram.WebApp.MainButton.setText('Save').show().onClick(function () {
-        const form = document.getElementById('applicantForm');
-        const formData = new FormData(form);
-        const data = JSON.stringify(Object.fromEntries(formData));
+        form = document.getElementById('applicantForm');
+        formData = new FormData(form);
+        data = JSON.stringify(Object.fromEntries(formData));
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
     });

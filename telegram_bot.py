@@ -293,8 +293,11 @@ async def back_form(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         "Send /back to comback to previous step.\n\n"
         "Send /cancel to stop talking to me.\n\n"
         "Came back, please refill your form again",
-        reply_markup=ReplyKeyboardMarkup(
-            reply_keyboard, one_time_keyboard=True, input_field_placeholder="Success or Fail?"
+        reply_markup=ReplyKeyboardMarkup.from_button(
+            KeyboardButton(
+                text="Open the application form!",
+                web_app=WebAppInfo(url="https://hoang97.github.io/vfs-bot"),
+            )
         ),
     )
 
