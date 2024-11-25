@@ -1,114 +1,91 @@
 <!--
     Simple static Telegram WebApp. Does not verify the WebAppInitData, as a bot token would be needed for that.
 -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>VFS appliant form</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-</head>
-    <script type="text/javascript">
-        Telegram.WebApp.ready();
-        Telegram.WebApp.MainButton.setText('Save').show().onClick(function () {
-            const form = document.getElementById('applicantForm');
-            const formData = new FormData(form);
-            const data = JSON.stringify(Object.fromEntries(formData));
-            Telegram.WebApp.sendData(data);
-            Telegram.WebApp.close();
-        });
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applicant Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .form-container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        .form-container label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-        }
-        .form-container input,
-        .form-container select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .form-container .buttons {
-            display: flex;
-            justify-content: space-between;
-        }
-        .form-container button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .form-container button.save {
-            background-color: #e67e22;
-            color: white;
-        }
-        .form-container button.cancel {
-            background-color: #e0e0e0;
-        }
-    </style>
-</head>
-<body>
-    <div class="form-container">
-        <form id="applicantForm">
-            <h2>Applicant 1</h2>
 
-            <label for="first-name">First Name*</label>
-            <input type="text" id="first-name" placeholder="ENTER YOUR FIRST NAME">
-
-            <label for="last-name">Last Name*</label>
-            <input type="text" id="last-name" placeholder="PLEASE ENTER LAST NAME.">
-
-            <label for="gender">Gender*</label>
-            <select id="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-
-            <label for="dob">Date Of Birth*</label>
-            <input type="date" id="dob">
-
-            <label for="nationality">Current Nationality*</label>
-            <select id="nationality">
-                <option value="nationality1">Nationality 1</option>
-                <option value="nationality2">Nationality 2</option>
-                <option value="nationality3">Nationality 3</option>
-            </select>
-
-            <label for="passport-number">Passport Number</label>
-            <input type="text" id="passport-number" placeholder="ENTER PASSPORT NUMBER">
-
-            <label for="passport-expiry">Passport Expiry Date</label>
-            <input type="date" id="passport-expiry">
-
-            <label for="contact-number">Contact Number*</label>
-            <div style="display: flex; gap: 5px;">
-                <input type="text" style="width: 15%;" value="44" readonly>
-                <input type="text" id="contact-number" placeholder="012345648382">
-            </div>
-
-            <label for="email">Email*</label>
-            <input type="email" id="email" placeholder="ENTER EMAIL ADDRESS">
-        </form>
-    </div>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Applicant Form</title>
+     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+ </head>
+ <body>
+     <div class="container mt-5">
+         <h3 class="mb-4">Applicant 1</h3>
+         <form id="applicantForm">
+             <!-- First Name -->
+             <div class="mb-3">
+                 <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                 <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+             </div>
+             <!-- Last Name -->
+             <div class="mb-3">
+                 <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                 <input type="text" class="form-control" id="lastName" placeholder="Please enter last name" required>
+             </div>
+             <!-- Gender -->
+             <div class="mb-3">
+                 <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                 <select class="form-select" id="gender" required>
+                     <option value="Male">Male</option>
+                     <option value="Female">Female</option>
+                     <option value="Other">Other</option>
+                 </select>
+             </div>
+             <!-- Date of Birth -->
+             <div class="mb-3">
+                 <label for="dob" class="form-label">Date of Birth <span class="text-danger">*</span></label>
+                 <input type="date" class="form-control" id="dob" required>
+             </div>
+             <!-- Current Nationality -->
+             <div class="mb-3">
+                 <label for="nationality" class="form-label">Current Nationality <span class="text-danger">*</span></label>
+                 <select class="form-select" id="nationality" required>
+                     <option value="Vietnam">Vietnam</option>
+                     <option value="Ukraine">Ukraine</option>
+                     <option value="Russia">Russia</option>
+                     <!-- Add options for nationalities here -->
+                 </select>
+             </div>
+             <!-- Passport Number -->
+             <div class="mb-3">
+                 <label for="passportNumber" class="form-label">Passport Number</label>
+                 <input type="text" class="form-control" id="passportNumber" placeholder="Enter passport number">
+             </div>
+             <!-- Passport Expiry Date -->
+             <div class="mb-3">
+                 <label for="passportExpiryDate" class="form-label">Passport Expiry Date</label>
+                 <input type="date" class="form-control" id="passportExpiryDate">
+             </div>
+             <!-- Contact Number -->
+             <div class="mb-3">
+                 <label for="contactNumber" class="form-label">Contact Number <span class="text-danger">*</span></label>
+                 <div class="input-group">
+                     <span class="input-group-text">+44</span>
+                     <input type="tel" class="form-control" id="contactNumber" placeholder="012345648382" required>
+                 </div>
+             </div>
+             <!-- Email -->
+             <div class="mb-3">
+                 <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                 <input type="email" class="form-control" id="email" placeholder="Enter email address" required>
+             </div>
+         </form>
+     </div>
+ 
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <script type="text/javascript">
+    Telegram.WebApp.ready();
+    Telegram.WebApp.MainButton.setText('Save').show().onClick(function () {
+        const form = document.getElementById('applicantForm');
+        const formData = new FormData(form);
+        const data = JSON.stringify(Object.fromEntries(formData));
+        Telegram.WebApp.sendData(data);
+        Telegram.WebApp.close();
+    });
     Telegram.WebApp.expand();
 </script>
 </html>
